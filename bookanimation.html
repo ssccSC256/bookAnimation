@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開かれた本アニメーション</title>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.getElementById("kirakira").style.top = "130%";
+
+                setTimeout(function() {
+                document.getElementById("kirakira").style.opacity = "0";
+                }, 4800);
+                setTimeout(function() {
+                document.getElementById("kirakira").style.display = "none";
+                }, 5800);
+                setTimeout(function() {
+                document.getElementById("kirakira_parent").style.display = "none";
+                }, 5900);
+                setTimeout(function() {
+                document.getElementById("book").style.display = "block";
+                }, 6000);
+            }, 500);
+
+            setTimeout(()=>{
+                    setTimeout(()=>{
+                        document.getElementById("body").style.backgroundColor = "rgb(139, 138, 138)";
+                            setTimeout(()=>{
+                            document.getElementById("body").style.backgroundColor = "rgb(154, 154, 154)";
+                                setTimeout(()=>{
+                                document.getElementById("body").style.backgroundColor = "rgb(174, 174, 174)";
+                                    setTimeout(()=>{
+                                    document.getElementById("body").style.backgroundColor = "rgb(189, 188, 188)";
+                                        setTimeout(()=>{
+                                        document.getElementById("body").style.backgroundColor = "rgb(212, 210, 210)";
+                                            setTimeout(()=>{
+                                            document.getElementById("body").style.backgroundColor = "rgb(232, 230, 230)";
+                                                setTimeout(()=>{
+                                                document.getElementById("body").style.backgroundColor = "white";
+                                                }, 100)
+                                            }, 100)
+                                    }, 100)
+                                }, 100)
+                            }, 100)
+                        }, 100)
+                    }, 100)
+                }, 4600)
+        })
+    </script>
+
+    <style>
+        .kirakira{
+            opacity: 1;
+            top: -251%;
+            transition: top 15s, opacity 1s;
+        }
+        .book{
+            display: none;
+        }
+    </style>
+
+</head>
+<body id="body" style="background-color: rgb(111, 111, 111);">
+
+    <!--ワンピース-->
+    <div id="kirakira_parent" style="position: relative; height: 100vh; width: 100vw; background-color: transparent;">
+        <div id="kirakira" class="kirakira" style="position: absolute; height: 250vh; width: 10vw; background-color: transparent; left: 45%; top: -251%;">
+
+            <script>
+                const light_parent = document.getElementById("kirakira"); //光球を置く親要素
+
+                const light_num = 50; //光の数
+                const t_max = 97; // 光の最大高さ
+                const t_min = 0; 
+                const l_max = 87; //光の最大横位置
+                const l_min = 2;
+
+                for(let i = 0; i < light_num; i++){
+                    const light = document.createElement("div"); //新しい光の生成
+                    light.style.position = "absolute";
+                    light.style.width = "2vw";
+                    light.style.height = "2vw";
+                    light.style.borderRadius = "50%";
+                    light.style.background = "radial-gradient(at right top, white 30%, yellow)";
+                    light.style.boxShadow = "0.036vw 0 3vw yellow, 0 0.036vw 3vw yellow, 0 -0.036vw 3vw yellow, -0.036vw 0 3vw yellow";
+                    light.id = i;
+
+                    const left = Math.random() * (l_max - l_min) + l_min;
+                    const top = Math.random() * (t_max - t_min) + t_min;
+
+                    light.style.left = left + "%";
+                    light.style.top = top + "%";
+
+                    const scale = Math.random() * 0.1 + 0.5;
+                    light.style.transform = `scale(${scale})`;
+                    
+                    const animation_name = `resize_anime`;
+
+                    const style = document.styleSheets[0];
+                    style.insertRule(
+                        `@keyframes ${animation_name}{
+                            0% {transform: scale(${scale * 0.8});}
+                            50% {transform: scale(${scale * 0.2});}
+                            100% {transform: scale(${scale * 0.8});}
+                        }`, style.cssRules.length);
+
+                    light.style.animation = `${animation_name} 1s infinite`;
+                    
+                    light.style.animationDelay = Math.random() + "s";
+
+                    light_parent.appendChild(light);
+
+                }
+
+
+            </script>
+
+        </div>
+    </div>
+
+    <!--本-->
+    <div id="book" class="book" style="position: relative; height: 100vw; width: 100vw; margin-top: -30vh; margin-left: -10vw; background-color: white;">
+        
+        <!--本の一番下-->
+        <div style="position: absolute; width: 30%; height: 10%; top: 50%; left: 30%; background-color: black; transform: skew(-30deg, 0deg);"></div>
+        <div style="position: absolute; width: 30%; height: 10%; top: 50%; left: 60%; background-color: black; transform: skew(30deg, 0deg);"></div>
+
+        <!--本の繋ぎ目-->
+        <div style="position: absolute; width: 5%; height: 5%; top: 57%; left: 56%; background-color: black; transform: skew(30deg, 0deg);"></div>
+        <div style="position: absolute; width: 5%; height: 5%; top: 57%; left: 59%; background-color: black; transform: skew(-30deg, 0deg);"></div>
+        <div style="position: absolute; width: 8%; height: 5%; top: 50%; left: 56%; background-color: aliceblue;"></div>
+        <div style="position: absolute; width: 58%; height: 10%; top: 49.5%; left: 31%; background-color: aliceblue;"></div>
+
+        <!--本2段目-->
+        <div style="position: absolute; width: 31%; height: 10%; top: 45%; left: 29%; background-color: aliceblue; transform: skew(-30deg, 0deg); border-left: 2px solid black;"></div>
+        <div style="position: absolute; width: 31%; height: 10%; top: 45%; left: 60%; background-color: aliceblue; transform: skew(30deg, 0deg); border-right: 2px solid black;"></div>
+
+        <!--本3段目-->
+        <div style="position: absolute; width: 31%; height: 10%; top: 40%; left: 29%; background-color: aliceblue; transform: skew(-30deg, 0deg); border-left: 2px solid black;"></div>
+        <div style="position: absolute; width: 31%; height: 10%; top: 40%; left: 60%; background-color: aliceblue; transform: skew(30deg, 0deg); border-right: 2px solid black;"></div>
+
+        <!--本繋ぎ目-->
+        <div style="position: absolute; border-radius: 50%; width: 0.5%; height: 13%; top: 46.5%; left: 60%; background-color: black;"></div>
+        
+        <!--本枠線-->
+        <div style="position: absolute; border-radius: 0 100% 0 0; width: 30%; height: 5%; top: 55%; left: 30.3%; background-color: black;"></div>
+        <div style="position: absolute; border-radius: 100% 0 0 0; width: 30%; height: 5%; top: 55%; left: 60.2%; background-color: black;"></div>
+
+        <div style="position: absolute; border-radius: 0 100% 0 0; width: 33.9%; height: 10%; top: 50%; left: 26.3%; background-color: transparent; border-top: 2px solid black;"></div>
+        <div style="position: absolute; border-radius: 100% 0 0 0; width: 33.7%; height: 10%; top: 50%; left: 60.2%; background-color: transparent; border-top: 2px solid black;"></div>
+
+        <div style="position: absolute; border-radius: 0 100% 0 0; width: 33.9%; height: 5%; top: 55%; left: 26.1%; background-color: transparent; border-top: 2px solid black;"></div>
+        <div style="position: absolute; border-radius: 100% 0 0 0; width: 33.7%; height: 5%; top: 55%; left: 60.2%; background-color: transparent; border-top: 2px solid black;"></div>
+
+        <div style="position: absolute; text-align: center; top: 30%; left: 10%; width: 100%; background-color: transparent;">
+            <div style="font-size: 5vw; font-weight: bold;">初めてのHTML・CSS</div>
+            <div style="font-size: 7vw; font-weight: bold; margin-top: -2vw;">本を作成してみました</div>
+        </div>
+        
+    </div>
+</body>
+</html>
